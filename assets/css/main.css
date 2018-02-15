@@ -1,0 +1,17 @@
+.character{
+    color: white;
+    min-height: 200px;
+    background-color: #181818;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.game {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.img-fluid{
+    max-height: 100%;
+}
