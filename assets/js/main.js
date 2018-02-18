@@ -51,6 +51,7 @@ $(document).ready(function () {
                 $('.active-battle').removeClass('hidden');
                 $('.characters').addClass('hidden');
                 game.chooseEnemy();
+
             });
         },
         chooseEnemy: function () {
