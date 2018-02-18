@@ -71,12 +71,29 @@ $(document).ready(function () {
                     defBtn.text('Defend');
                     controls.append(atkBtn, defBtn);
                     game.domContainers.activeBattleContainer.append(controls);
+                    $('.attack-button').on('click', game.attack);
                 }
                 game.domContainers.activeBattleContainer.append(this);
             });
+        },
+        attack: function () {
+            var char = $('.selected-character')
+            var enemy = $('.selected-enemy')
+            var charAtk = Math.floor(Math.random() * (char.data('maxAtk') - char.data('minAtk') + 1) + char.data('minAtk'));
+            var enemyAtk = Math.floor(Math.random() * (enemy.data('maxAtk') - enemy.data('minAtk') + 1) + enemy.data('minAtk'));
+            enemy.data('hp', enemy.data('hp') - charAtk);
+            char.data('hp', char.data('hp') - enemyAtk);
+            $('.selected-character .hp-display').text('HP: ' + char.data('hp'));
+            $('.selected-enemy .hp-display').text('HP: ' + enemy.data('hp'));
+        },
+        defend: function () {
+
+        },
+        checkDeath: function (char) {
+
         }
     };
-    game.characters.push(game.createCharacter("Gundam", 150, 'assets/images/gundam.png', 10, 40));
+    game.characters.push(game.createCharacter("Gundam", 150, 'assets/images/gundam.png', 1, 40));
     game.characters.push(game.createCharacter("Voltron", 150, 'assets/images/voltron.png', 10, 40));
     game.characters.push(game.createCharacter("Wall-e", 150, 'assets/images/walle.png', 10, 40));
     game.characters.push(game.createCharacter("Zoids", 150, 'assets/images/zoid.jpg', 10, 40));
@@ -84,5 +101,4 @@ $(document).ready(function () {
         game.domContainers.unselectedCharactersContainer.append(val.div);
     });
     game.chooseCharacter();
-
 });
