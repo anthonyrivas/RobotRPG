@@ -1,5 +1,6 @@
+var game;
 $(document).ready(function () {
-    var game = {
+    game = {
         characters: [],
         domContainers: {
             unselectedCharactersContainer: $('.characters'),
@@ -34,6 +35,44 @@ $(document).ready(function () {
             newDiv.append(hpDisplay);
             char.div = newDiv;
             return char;
+        },
+        chooseCharacter: function () {
+            $('.unselected-character').click(function () {
+                $('.unselected-character').off();
+                $(this).addClass('selected-character');
+                $(this).removeClass('unselected-character');
+                game.domContainers.activeBattleContainer.append(this);
+                $('.unselected-character').each(function (index, val) {
+                    $(val).addClass('unselected-enemy');
+                    $(val).removeClass('unselected-character');
+                    game.domContainers.unselectedEnemysContainer.append(val);
+                });
+                $('.enemy-characters').removeClass('hidden');
+                $('.active-battle').removeClass('hidden');
+                $('.characters').addClass('hidden');
+                game.chooseEnemy();
+            });
+        },
+        chooseEnemy: function () {
+            $('.selected-enemy').remove();
+            $('.unselected-enemy').click(function () {
+                $('.unselected-enemy').off();
+                $(this).addClass('selected-enemy');
+                $(this).removeClass('unselected-enemy');
+                if ($('.combat-controls').length === 0) {
+                    var controls = $('<div>');
+                    controls.attr('class', 'combat-controls col-2 p-3 m-3');
+                    var atkBtn = $('<div>');
+                    atkBtn.attr('class', 'attack-button btn btn-outline-primary mt-3');
+                    atkBtn.text('Attack');
+                    var defBtn = $('<div>');
+                    defBtn.attr('class', 'defend-button btn btn-outline-primary mt-3');
+                    defBtn.text('Defend');
+                    controls.append(atkBtn, defBtn);
+                    game.domContainers.activeBattleContainer.append(controls);
+                }
+                game.domContainers.activeBattleContainer.append(this);
+            });
         }
     };
     game.characters.push(game.createCharacter("Gundam", 150, 'assets/images/gundam.png', 10, 40));
@@ -43,28 +82,6 @@ $(document).ready(function () {
     $.each(game.characters, function (index, val) {
         game.domContainers.unselectedCharactersContainer.append(val.div);
     });
-    $('.unselected-character').click(function () {
-        $('.unselected-character').off();
-        $(this).addClass('selected-character');
-        $(this).removeClass('unselected-character');
-        game.domContainers.activeBattleContainer.append(this);
-        $('.unselected-character').each(function (index, val) {
-            $(val).addClass('unselected-enemy');
-            $(val).removeClass('unselected-character');
-            game.domContainers.unselectedEnemysContainer.append(val);
-        });
-        $('.enemy-characters').removeClass('hidden');
-        $('.active-battle').removeClass('hidden');
-        $('.characters').addClass('hidden');
-        $('.unselected-enemy').click(function () {
-            $('.unselected-enemy').off();
-            $(this).addClass('selected-enemy');
-            $(this).removeClass('unselected-enemy');
-            console.log($(this).data('name'));
-            console.log($(this).data('hp'));
-            console.log($(this).data('minAtk'));
-            console.log($(this).data('maxAtk'));
-            game.domContainers.activeBattleContainer.append(this);
-        });
-    });
+    game.chooseCharacter();
+
 });

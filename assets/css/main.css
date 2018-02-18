@@ -1,14 +1,20 @@
 body{
     background-color: #181818;
-}
-.character{
     color: white;
+}
+.character, .combat-controls{
     min-height: 250px;
     border-bottom: .5rem solid #135472;
     border-top: .5rem solid #135472;
     border-radius: 20px;
     overflow: hidden;
     word-wrap: break-word;
+}
+.combat-controls{
+    text-align: center;
+}
+.attack-button, .defend-button{
+    width: 100%;
 }
 .character h3{
     font-size: 1.25rem;
@@ -19,7 +25,6 @@ body{
     text-align: center;
     padding: .5rem;
     font-size: 2rem;
-
 }
 
 .game {
@@ -32,7 +37,6 @@ body{
     max-height: 100%;
 }
 .row h2{
-    color: white;
     width: 100%;
     text-align: center;
 }
