@@ -44,3 +44,10 @@ body{
 .hidden{
     display: none;
 }
+
+.death-message{
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+    padding-bottom: 6rem;
+}
