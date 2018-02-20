@@ -57,8 +57,8 @@ $(document).ready(function () {
         chooseEnemy: function () {
             $('.unselected-enemy').click(function () {
                 $('.unselected-enemy').off();
-                $(this).data('minAtk', $(this).data('minAtk') / 2);
-                $(this).data('mmaxAtk', $(this).data('maxAtk') / 2);
+                $(this).data('minAtk', $(this).data('minAtk') / 4);
+                $(this).data('maxAtk', $(this).data('maxAtk') / 4);
                 $(this).addClass('selected-enemy');
                 $(this).removeClass('unselected-enemy');
                 if ($('.combat-controls').length === 0) {
